@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DAL.Concrete;
+using DAL.Interfaces;
 using System;
 using TradingCompany.BLL;
 using TradingCompany.DTO;
@@ -26,14 +27,19 @@ namespace TradingCompany
 
         public void ShowAllPosts()
         {
-            command.ShowAllPosts();
+            var posts = command.GetAllPosts();
+            foreach (var post in posts)
+            {
+                Console.WriteLine(post.ToString());
+            }
         }
 
         public void ShowPostByID()
         {
             Console.WriteLine("Enter post ID:");
             var id = int.Parse(Console.ReadLine());
-            command.ShowPostByID(id);
+            var post = command.GetPostByID(id);
+            Console.WriteLine(post.ToString());
         }
 
         public void AddPost()
@@ -50,7 +56,10 @@ namespace TradingCompany
                 RowInsertTime = DateTime.UtcNow,
                 RowUpdateTime = DateTime.UtcNow
             };
-            command.AddPost(post);
+            post = command.AddPost(post);
+            if (post == null)
+                return;
+            Console.WriteLine($"New post ID: {post.PostID}");
         }
 
         public void UpdatePost()
@@ -68,7 +77,10 @@ namespace TradingCompany
                 Content = content,
                 RowUpdateTime = DateTime.UtcNow
             };
-            command.UpdatePost(id, post);
+            post = command.UpdatePost(id, post);
+            if (post == null)
+                return;
+            Console.WriteLine($"Updated post ID: {post.PostID}");
         }
 
         public void DeletePost()
@@ -80,14 +92,19 @@ namespace TradingCompany
 
         public void ShowAllCategories()
         {
-            command.ShowAllCategories();
+            var categories = command.GetAllCategories();
+            foreach (var category in categories)
+            {
+                Console.WriteLine(category.ToString());
+            }
         }
 
         public void ShowCategoryByID()
         {
             Console.WriteLine("Enter category ID:");
             var id = int.Parse(Console.ReadLine());
-            command.ShowCategoryByID(id);
+            var category = command.GetCategoryByID(id);
+            Console.WriteLine(category.ToString());
         }
 
         public void AddCategory()
@@ -99,7 +116,10 @@ namespace TradingCompany
             {
                 Name = name
             };
-            command.AddCategory(category);
+            category = command.AddCategory(category);
+            if (category == null)
+                return;
+            Console.WriteLine($"New category ID: {category.CategoryID}");
         }
 
         public void UpdateCategory()
@@ -114,7 +134,10 @@ namespace TradingCompany
                 Name = name,
                 RowInsertTime = DateTime.UtcNow
             };
-            command.UpdateCategory(id, category);
+            category = command.UpdateCategory(id, category);
+            if (category == null)
+                return;
+            Console.WriteLine($"Updated category ID: {category.CategoryID}");
         }
 
         public void DeleteCategory()
@@ -126,14 +149,19 @@ namespace TradingCompany
 
         public void ShowAllProducts()
         {
-            command.ShowAllProducts();
+            var products = command.GetAllProducts();
+            foreach (var product in products)
+            {
+                Console.WriteLine(product.ToString());
+            }
         }
 
         public void ShowProductByID()
         {
             Console.WriteLine("Enter product ID:");
             var id = int.Parse(Console.ReadLine());
-            command.ShowProductByID(id);
+            var product = command.GetProductByID(id);
+            Console.WriteLine(product.ToString());
         }
 
         public void AddProduct()
@@ -156,7 +184,10 @@ namespace TradingCompany
                 RowInsertTime = DateTime.UtcNow,
                 RowUpdateTime = DateTime.UtcNow
             };
-            command.AddProduct(product);
+            product = command.AddProduct(product);
+            if (product == null)
+                return;
+            Console.WriteLine($"New product ID: {product.ProductID}");
         }
 
         public void UpdateProduct()
@@ -180,7 +211,10 @@ namespace TradingCompany
                 Price = price,
                 RowUpdateTime = DateTime.UtcNow
             };
-            command.UpdateProduct(id, product);
+            product = command.UpdateProduct(id, product);
+            if (product == null)
+                return;
+            Console.WriteLine($"Updated product ID: {product.ProductID}");
         }
 
         public void DeleteProduct()

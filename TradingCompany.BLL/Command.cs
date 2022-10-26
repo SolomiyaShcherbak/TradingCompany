@@ -15,15 +15,6 @@ namespace TradingCompany.BLL
         IProductDAL productDAL;
         ICategoryDAL categoryDAL;
         IPostDAL postDAL;
-        IMapper Mapper = SetupMapper();
-
-        private static IMapper SetupMapper()
-        {
-            MapperConfiguration config = new MapperConfiguration(
-                cfg => cfg.AddMaps(typeof(IProductDAL).Assembly)
-                );
-            return config.CreateMapper();
-        }
 
         public Command(IProductDAL itemDAL, ICategoryDAL categoryDAL, IPostDAL postDAL)
         {
@@ -32,35 +23,24 @@ namespace TradingCompany.BLL
             this.postDAL = postDAL;
         }
 
-        public void ShowAllProducts()
+        public List<ProductDTO> GetAllProducts()
         {
-            var products = productDAL.GetAllProducts();
-            foreach (var product in products)
-            {
-                Console.WriteLine(product.ToString());
-            }
+            return productDAL.GetAllProducts();
         }
 
-        public void ShowProductByID(int id)
+        public ProductDTO GetProductByID(int id)
         {
-            var product = productDAL.GetProductByID(id);
-            Console.WriteLine(product.ToString());
+            return productDAL.GetProductByID(id);
         }
 
-        public void AddProduct(ProductDTO product)
+        public ProductDTO AddProduct(ProductDTO product)
         {
-            product = productDAL.CreateProduct(product);
-            if (product == null)
-                return;
-            Console.WriteLine($"New product ID: {product.ProductID}");
+            return productDAL.CreateProduct(product);
         }
 
-        public void UpdateProduct(int id, ProductDTO product)
+        public ProductDTO UpdateProduct(int id, ProductDTO product)
         {
-            product = productDAL.UpdateProduct(id, product);
-            if (product == null)
-                return;
-            Console.WriteLine($"Updated product ID: {product.ProductID}");
+            return productDAL.UpdateProduct(id, product);
         }
 
         public void DeleteProduct(int id)
@@ -68,35 +48,24 @@ namespace TradingCompany.BLL
             productDAL.DeleteProduct(id);
         }
 
-        public void ShowAllPosts()
+        public List<PostDTO> GetAllPosts()
         {
-            var posts = postDAL.GetAllPosts();
-            foreach (var post in posts)
-            {
-                Console.WriteLine(post.ToString());
-            }
+            return postDAL.GetAllPosts();
         }
 
-        public void ShowPostByID(int id)
+        public PostDTO GetPostByID(int id)
         {
-            var post = postDAL.GetPostByID(id);
-            Console.WriteLine(post.ToString());
+            return postDAL.GetPostByID(id);
         }
 
-        public void AddPost(PostDTO post)
+        public PostDTO AddPost(PostDTO post)
         {
-            post = postDAL.CreatePost(post);
-            if (post == null)
-                return;
-            Console.WriteLine($"New post ID: {post.PostID}");
+            return postDAL.CreatePost(post);
         }
 
-        public void UpdatePost(int id, PostDTO post)
+        public PostDTO UpdatePost(int id, PostDTO post)
         {
-            post = postDAL.UpdatePost(id, post);
-            if (post == null)
-                return;
-            Console.WriteLine($"Updated post ID: {post.PostID}");
+            return postDAL.UpdatePost(id, post);
         }
 
         public void DeletePost(int id)
@@ -104,35 +73,24 @@ namespace TradingCompany.BLL
             postDAL.DeletePost(id);
         }
 
-        public void ShowAllCategories()
+        public List<CategoryDTO> GetAllCategories()
         {
-            var categories = categoryDAL.GetAllCategories();
-            foreach (var category in categories)
-            {
-                Console.WriteLine(category.ToString());
-            }
+            return categoryDAL.GetAllCategories();
         }
 
-        public void ShowCategoryByID(int id)
+        public CategoryDTO GetCategoryByID(int id)
         {
-            var category = categoryDAL.GetCategoryById(id);
-            if (category == null)
-                return;
-            Console.WriteLine(category.ToString());
+            return categoryDAL.GetCategoryById(id);
         }
 
-        public void AddCategory(CategoryDTO category)
+        public CategoryDTO AddCategory(CategoryDTO category)
         {
-            category = categoryDAL.CreateCategory(category);
-            Console.WriteLine($"New category ID: {category.CategoryID}");
+            return categoryDAL.CreateCategory(category);
         }
 
-        public void UpdateCategory(int id, CategoryDTO category)
+        public CategoryDTO UpdateCategory(int id, CategoryDTO category)
         {
-            category = categoryDAL.UpdateCategory(id, category);
-            if (category == null)
-                return;
-            Console.WriteLine($"Updated category ID: {category.CategoryID}");
+            return categoryDAL.UpdateCategory(id, category);
         }
 
         public void DeleteCategory(int id)

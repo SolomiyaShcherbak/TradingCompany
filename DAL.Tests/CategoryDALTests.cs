@@ -154,7 +154,7 @@ namespace DAL.Tests
 
             var categoryDAL = new CategoryDAL(_mapper);
 
-            Assert.Throws<ArgumentNullException>(() => categoryDAL.DeleteCategory(1));
+            Assert.IsNull(categoryDAL.DeleteCategory(1));
         }
 
         private CategoryDTO InsertCategoryIntoDatabase()

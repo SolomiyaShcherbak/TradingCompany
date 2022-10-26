@@ -99,7 +99,7 @@ namespace DAL.Tests
                 RowUpdateTime = DateTime.UtcNow
             };
 
-            Assert.Throws<DbUpdateException>(() => productDAL.CreateProduct(product));
+            Assert.IsNull(productDAL.CreateProduct(product));
         }
 
         [Test, Rollback]
@@ -143,7 +143,7 @@ namespace DAL.Tests
                 RowUpdateTime = DateTime.UtcNow
             };
 
-            Assert.Throws<DbUpdateException>(() => productDAL.UpdateProduct(product.ProductID, updatedProduct));
+            Assert.IsNull(productDAL.UpdateProduct(product.ProductID, updatedProduct));
         }
 
         [Test, Rollback]
@@ -172,7 +172,7 @@ namespace DAL.Tests
 
             var productDAL = new ProductDAL(_mapper);
 
-            Assert.Throws<ArgumentNullException>(() => productDAL.DeleteProduct(1));
+            Assert.IsNull(productDAL.DeleteProduct(1));
         }
 
         private ProductDTO InsertProductIntoDatabase()

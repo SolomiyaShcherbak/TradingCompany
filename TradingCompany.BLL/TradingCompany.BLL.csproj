@@ -45,6 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command.cs" />
+    <Compile Include="Concrete\AuthenticationManager.cs" />
+    <Compile Include="Concrete\CategoryManager.cs" />
+    <Compile Include="Concrete\PostManager.cs" />
+    <Compile Include="Concrete\ProductManager.cs" />
+    <Compile Include="Concrete\UserManager.cs" />
+    <Compile Include="Interfaces\IAuthenticationManager.cs" />
+    <Compile Include="Interfaces\ICategoryManager.cs" />
+    <Compile Include="Interfaces\IPostManager.cs" />
+    <Compile Include="Interfaces\IProductManager.cs" />
+    <Compile Include="Interfaces\IUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

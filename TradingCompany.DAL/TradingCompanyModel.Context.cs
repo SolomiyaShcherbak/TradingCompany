@@ -29,5 +29,6 @@ namespace DAL
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<PostProduct> PostProducts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

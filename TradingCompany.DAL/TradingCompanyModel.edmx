@@ -18,7 +18,7 @@
             <PropertyRef Name="PostID" />
           </Key>
           <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="Content" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="RowInsertTime" Type="datetime" Nullable="false" />
           <Property Name="RowUpdateTime" Type="datetime" Nullable="false" />
@@ -37,10 +37,22 @@
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="RowInsertTime" Type="datetime" Nullable="false" />
+          <Property Name="RowUpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="binary" MaxLength="64" Nullable="false" />
+          <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RowInsertTime" Type="datetime" Nullable="false" />
           <Property Name="RowUpdateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -91,6 +103,7 @@
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostProduct" EntityType="Self.PostProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_PostProduct_Post" Association="Self.FK_PostProduct_Post">
             <End Role="Post" EntitySet="Post" />
             <End Role="PostProduct" EntitySet="PostProduct" />
@@ -122,7 +135,7 @@
             <PropertyRef Name="PostID" />
           </Key>
           <Property Name="PostID" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RowInsertTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RowUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -133,9 +146,9 @@
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="RowInsertTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RowUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -206,7 +219,20 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="PostProduct" EntitySet="PostProducts" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="TradingCompanyModel.User" />
         </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="Binary" Nullable="false" MaxLength="64" FixedLength="true" />
+          <Property Name="Salt" Type="Guid" Nullable="false" />
+          <Property Name="RowInsertTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -252,6 +278,19 @@
                 <ScalarProperty Name="PostID" ColumnName="PostID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="RowInsertTime" ColumnName="RowInsertTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TradingCompanyModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="RowUpdateTime" ColumnName="RowUpdateTime" />
+                <ScalarProperty Name="RowInsertTime" ColumnName="RowInsertTime" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

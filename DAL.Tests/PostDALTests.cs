@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using TradingCompany.DTO;
 using System.Data.Entity.Validation;
+using System.Linq;
 
 namespace DAL.Tests
 {
@@ -91,7 +92,7 @@ namespace DAL.Tests
             var postDAL = new PostDAL(_mapper);
             var post = new PostDTO
             {
-                Title = "They all asked, “Are you then the Son of God?” He replied, “You say that I am.” Then they said, “Why do we need any more testimony? We have heard it from his own lips.”",
+                Title = RandomString(301),
                 Content = "test content",
                 RowInsertTime = DateTime.UtcNow,
                 RowUpdateTime = DateTime.UtcNow
@@ -129,7 +130,7 @@ namespace DAL.Tests
 
             var updatedPost = new PostDTO
             {
-                Title = "Wanting to release Jesus, Pilate appealed to them again. But they kept shouting, “Crucify him! Crucify him!”",
+                Title = RandomString(302),
                 Content = "test content updated",
                 RowInsertTime = DateTime.UtcNow,
                 RowUpdateTime = DateTime.UtcNow
@@ -164,7 +165,7 @@ namespace DAL.Tests
 
             var postDAL = new PostDAL(_mapper);
 
-            Assert.Throws<ArgumentNullException>(() => postDAL.DeletePost(1));
+            Assert.IsNull(postDAL.DeletePost(1));
         }
 
         private PostDTO InsertPostIntoDatabase()
@@ -184,6 +185,14 @@ namespace DAL.Tests
             };
 
             return postDAL.CreatePost(post);
+        }
+
+        public static string RandomString(int length)
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
