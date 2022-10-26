@@ -29,8 +29,17 @@ namespace DAL.Concrete
         {
             using (var entities = new TradingCompanyEntities())
             {
-                var categoryInDB = entities.Categories.FirstOrDefault(x => x.CategoryID == id);
-                return _mapper.Map<CategoryDTO>(categoryInDB);
+                var existCategory = entities.Categories.Any(c => c.CategoryID == id);
+                Category categoryInDB;
+                if (existCategory)
+                {
+                    categoryInDB = entities.Categories.FirstOrDefault(x => x.CategoryID == id);
+                    return _mapper.Map<CategoryDTO>(categoryInDB);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -50,10 +59,19 @@ namespace DAL.Concrete
         {
             using (var entities = new TradingCompanyEntities())
             {
-                var categoryToUpdate = entities.Categories.FirstOrDefault(x => x.CategoryID == id);
-                categoryToUpdate.Name = category.Name;
-                entities.SaveChanges();
-                return _mapper.Map<CategoryDTO>(categoryToUpdate);
+                var existCategory = entities.Categories.Any(c => c.CategoryID == id);
+                Category categoryToUpdate;
+                if (existCategory)
+                {
+                    categoryToUpdate = entities.Categories.FirstOrDefault(x => x.CategoryID == id);
+                    categoryToUpdate.Name = category.Name;
+                    entities.SaveChanges();
+                    return _mapper.Map<CategoryDTO>(categoryToUpdate);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -61,10 +79,19 @@ namespace DAL.Concrete
         {
             using (var entities = new TradingCompanyEntities())
             {
-                var categoryInDB = entities.Categories.FirstOrDefault(c => c.CategoryID == id);
-                entities.Categories.Remove(categoryInDB);
-                entities.SaveChanges();
-                return _mapper.Map<CategoryDTO>(categoryInDB);
+                var existCategory = entities.Categories.Any(c => c.CategoryID == id);
+                Category categoryInDB;
+                if (existCategory)
+                {
+                    categoryInDB = entities.Categories.FirstOrDefault(c => c.CategoryID == id);
+                    entities.Categories.Remove(categoryInDB);
+                    entities.SaveChanges();
+                    return _mapper.Map<CategoryDTO>(categoryInDB);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }

@@ -29,8 +29,17 @@ namespace DAL.Concrete
         {
             using (var entities = new TradingCompanyEntities())
             {
-                var postInDB = entities.Posts.FirstOrDefault(x => x.PostID == id);
-                return _mapper.Map<PostDTO>(postInDB);
+                var existPost = entities.Posts.Any(p => p.PostID == id);
+                Post postInDB;
+                if (existPost)
+                {
+                    postInDB = entities.Posts.FirstOrDefault(x => x.PostID == id);
+                    return _mapper.Map<PostDTO>(postInDB);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -49,12 +58,21 @@ namespace DAL.Concrete
         {
             using (var entities = new TradingCompanyEntities())
             {
-                var postToUpdate = entities.Posts.FirstOrDefault(x => x.PostID == id);
-                postToUpdate.Title = post.Title;
-                postToUpdate.Content = post.Content;
-                postToUpdate.RowUpdateTime = DateTime.UtcNow;
-                entities.SaveChanges();
-                return _mapper.Map<PostDTO>(postToUpdate);
+                var existPost = entities.Posts.Any(p => p.PostID == id);
+                Post postToUpdate;
+                if (existPost)
+                {
+                    postToUpdate = entities.Posts.FirstOrDefault(x => x.PostID == id);
+                    postToUpdate.Title = post.Title;
+                    postToUpdate.Content = post.Content;
+                    postToUpdate.RowUpdateTime = DateTime.UtcNow;
+                    entities.SaveChanges();
+                    return _mapper.Map<PostDTO>(postToUpdate);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -62,10 +80,19 @@ namespace DAL.Concrete
         {
             using (var entities = new TradingCompanyEntities())
             {
-                var postInDB = entities.Posts.FirstOrDefault(c => c.PostID == id);
-                entities.Posts.Remove(postInDB);
-                entities.SaveChanges();
-                return _mapper.Map<PostDTO>(postInDB);
+                var existPost = entities.Posts.Any(p => p.PostID == id);
+                Post postInDB;
+                if (existPost)
+                {
+                    postInDB = entities.Posts.FirstOrDefault(c => c.PostID == id);
+                    entities.Posts.Remove(postInDB);
+                    entities.SaveChanges();
+                    return _mapper.Map<PostDTO>(postInDB);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }
