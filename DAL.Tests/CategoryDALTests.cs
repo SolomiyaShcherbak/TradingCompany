@@ -54,7 +54,7 @@ namespace DAL.Tests
             var category = InsertCategoryIntoDatabase();
             var categoryDAL = new CategoryDAL(_mapper);
 
-            var result = categoryDAL.GetCategoryById(category.CategoryID);
+            var result = categoryDAL.GetCategoryByID(category.CategoryID);
 
             var isoConvert = new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" };
             var expectedString = JsonConvert.SerializeObject(category, isoConvert);
@@ -67,7 +67,7 @@ namespace DAL.Tests
         public void Test_GetCategoryByID_InvalidID()
         {
             var categoryDAL = new CategoryDAL(_mapper);
-            var result = categoryDAL.GetCategoryById(-1);
+            var result = categoryDAL.GetCategoryByID(-1);
 
             Assert.IsNull(result);
         }

@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using DAL.Concrete;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TradingCompany.DTO;
 
-namespace DAL.Interfaces
+namespace TradingCompany.BLL.Interfaces
 {
-    public interface IPostDAL
+    public interface IPostManager
     {
         List<PostDTO> GetAllPosts();
 

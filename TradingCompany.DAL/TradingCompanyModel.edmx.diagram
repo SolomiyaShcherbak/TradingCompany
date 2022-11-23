@@ -13,6 +13,7 @@
         <AssociationConnector Association="TradingCompanyModel.FK_PostProduct_Post" ManuallyRouted="false" />
         <AssociationConnector Association="TradingCompanyModel.FK_PostProduct_Product" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TradingCompanyModel.User" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="TradingCompanyModel.FK_Post_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

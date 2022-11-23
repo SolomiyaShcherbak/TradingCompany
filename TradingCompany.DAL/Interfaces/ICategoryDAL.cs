@@ -7,7 +7,7 @@ namespace DAL.Interfaces
     {
         List<CategoryDTO> GetAllCategories();
 
-        CategoryDTO GetCategoryById(int id);
+        CategoryDTO GetCategoryByID(int id);
 
         CategoryDTO CreateCategory(CategoryDTO category);
 
