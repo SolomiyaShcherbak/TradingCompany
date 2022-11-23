@@ -32,20 +32,6 @@ namespace TradingCompany.WF
             UpdateForm();
         }
 
-        private void BindProducts()
-        {
-            BindingList<ProductDTO> products = new BindingList<ProductDTO>(_productManager.GetAllProducts());
-            bsProducts.DataSource = products;
-
-            ListBox[] listBox = { clbProducts };
-            foreach (var product in listBox)
-            {
-                product.DataSource = bsProducts;
-                product.DisplayMember = "Name";
-                product.ValueMember = "ProductID";
-            }
-        }
-
         private void UpdateForm()
         {
             BindProducts();
@@ -63,10 +49,25 @@ namespace TradingCompany.WF
             }
         }
 
+        private void BindProducts()
+        {
+            BindingList<ProductDTO> products = new BindingList<ProductDTO>(_productManager.GetAllProducts());
+            bsProducts.DataSource = products;
+
+            ListBox[] listBox = { clbProducts };
+            foreach (var product in listBox)
+            {
+                product.DataSource = bsProducts;
+                product.DisplayMember = "Name";
+                product.ValueMember = "ProductID";
+            }
+        }
+
         private void SetProperties()
         {
             _post.Title = txtTitle.Text;
             _post.Content = txtContent.Text;
+            _post.RowUpdateTime = DateTime.UtcNow;
             _post.Products.Clear();
 
             foreach (var product in clbProducts.CheckedItems)

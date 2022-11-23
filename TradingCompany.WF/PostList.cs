@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,7 @@ namespace TradingCompany.WF
             _postManager = postManager;
             _productManager = productManager;
             RefreshGrid();
+            SetComboboxValues();
         }
 
         private void RefreshGrid()
@@ -86,9 +88,21 @@ namespace TradingCompany.WF
             return false;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void SetComboboxValues()
         {
-            _posts = _postManager.FindPosts(textBox1.Text);
+            string[] items = { "by title", "by content", "by date" };
+            cbSearchBy.Items.AddRange(items);
+            cbSearchBy.SelectedIndex = 0;
+        }
+
+        private void txtSearchInput_TextChanged(object sender, EventArgs e)
+        {
+            if ((string)cbSearchBy.SelectedItem == "by title")
+                _posts = _postManager.FindPostsByTitle(txtSearchInput.Text);
+            else if ((string)cbSearchBy.SelectedItem == "by content")
+                _posts = _postManager.FindPostsByContent(txtSearchInput.Text);
+            else if ((string)cbSearchBy.SelectedItem == "by date")
+                _posts = _postManager.FindPostsByDate(txtSearchInput.Text);
 
             BindingList<PostDTO> blPosts = new BindingList<PostDTO>(_posts);
             bsPosts.DataSource = blPosts;

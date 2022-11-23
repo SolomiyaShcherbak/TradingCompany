@@ -2,6 +2,7 @@
 using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Xml.Linq;
 using TradingCompany.DTO;
@@ -44,11 +45,29 @@ namespace DAL.Concrete
             }
         }
 
-        public List<PostDTO> FindPosts(string searchInfo)
+        public List<PostDTO> FindPostsByTitle(string title)
         {
             using (var entities = new TradingCompanyEntities())
             {
-                var posts = entities.Posts.Where(p => p.Title.Contains(searchInfo)).ToList();
+                var posts = entities.Posts.Where(p => p.Title.Contains(title)).ToList();
+                return _mapper.Map<List<PostDTO>>(posts);
+            }
+        }
+
+        public List<PostDTO> FindPostsByContent(string content)
+        {
+            using (var entities = new TradingCompanyEntities())
+            {
+                var posts = entities.Posts.Where(p => p.Content.Contains(content)).ToList();
+                return _mapper.Map<List<PostDTO>>(posts);
+            }
+        }
+
+        public List<PostDTO> FindPostsByDate(string date)
+        {
+            using (var entities = new TradingCompanyEntities())
+            {
+                var posts = entities.Posts.Where(p => p.RowUpdateTime.ToString().Contains(date)).ToList();
                 return _mapper.Map<List<PostDTO>>(posts);
             }
         }
@@ -76,6 +95,8 @@ namespace DAL.Concrete
                     postToUpdate.Title = post.Title;
                     postToUpdate.Content = post.Content;
                     postToUpdate.RowUpdateTime = DateTime.UtcNow;
+                    postToUpdate = _mapper.Map(post, postToUpdate);
+                    entities.Entry(postToUpdate).State = EntityState.Modified;
                     entities.SaveChanges();
                     return _mapper.Map<PostDTO>(postToUpdate);
                 }

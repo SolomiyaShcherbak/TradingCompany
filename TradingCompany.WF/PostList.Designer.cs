@@ -49,8 +49,9 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtSearchInput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbSearchBy = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPosts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPosts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bnPosts)).BeginInit();
@@ -234,14 +235,14 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
-            // textBox1
+            // txtSearchInput
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox1.Location = new System.Drawing.Point(80, 416);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(174, 26);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtSearchInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtSearchInput.Location = new System.Drawing.Point(230, 418);
+            this.txtSearchInput.Name = "txtSearchInput";
+            this.txtSearchInput.Size = new System.Drawing.Size(174, 26);
+            this.txtSearchInput.TabIndex = 2;
+            this.txtSearchInput.TextChanged += new System.EventHandler(this.txtSearchInput_TextChanged);
             // 
             // label1
             // 
@@ -253,13 +254,22 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Search";
             // 
+            // cbSearchBy
+            // 
+            this.cbSearchBy.FormattingEnabled = true;
+            this.cbSearchBy.Location = new System.Drawing.Point(89, 418);
+            this.cbSearchBy.Name = "cbSearchBy";
+            this.cbSearchBy.Size = new System.Drawing.Size(121, 24);
+            this.cbSearchBy.TabIndex = 4;
+            // 
             // PostList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbSearchBy);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtSearchInput);
             this.Controls.Add(this.bnPosts);
             this.Controls.Add(this.dgvPosts);
             this.Name = "PostList";
@@ -295,8 +305,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn contentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn rowInsertTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn rowUpdateTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSearchInput;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbSearchBy;
     }
 }
 

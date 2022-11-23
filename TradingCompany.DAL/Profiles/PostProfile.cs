@@ -25,9 +25,7 @@ namespace DAL.Profiles
                     PostID = p.PostID,
                     ProductID = pp.ProductID,
                     RowInsertTime = DateTime.UtcNow
-                })))
-                .ForMember(dest => dest.User,
-                opts => opts.Ignore());
+                })));
         }
     }
 }

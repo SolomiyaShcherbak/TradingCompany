@@ -58,7 +58,6 @@ namespace TradingCompany.WF
                      .RegisterType<IPostManager, PostManager>()
                      .RegisterType<IProductManager, ProductManager>()
                      .RegisterType<ICategoryManager, CategoryManager>()
-                     .RegisterType<IUserManager, UserManager>()
                      .RegisterType<IAuthenticationManager, AuthenticationManager>();
         }
     }

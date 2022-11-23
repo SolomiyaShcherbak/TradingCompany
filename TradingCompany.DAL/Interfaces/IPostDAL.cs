@@ -9,7 +9,11 @@ namespace DAL.Interfaces
 
         PostDTO GetPostByID(int id);
 
-        List<PostDTO> FindPosts(string searchInfo);
+        List<PostDTO> FindPostsByTitle(string title);
+
+        List<PostDTO> FindPostsByContent(string content);
+
+        List<PostDTO> FindPostsByDate(string date);
 
         PostDTO CreatePost(PostDTO post);
 

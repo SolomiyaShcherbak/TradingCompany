@@ -10,15 +10,10 @@
 namespace DAL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class PostProduct
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int PostID { get; set; }
-        public int ProductID { get; set; }
-        public System.DateTime RowInsertTime { get; set; }
-    
-        public virtual Product Product { get; set; }
-        public virtual Post Post { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

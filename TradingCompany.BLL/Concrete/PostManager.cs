@@ -29,9 +29,19 @@ namespace TradingCompany.BLL.Concrete
             return postDAL.GetPostByID(id);
         }
 
-        public List<PostDTO> FindPosts(string searchInfo)
+        public List<PostDTO> FindPostsByTitle(string title)
         {
-            return postDAL.FindPosts(searchInfo);
+            return postDAL.FindPostsByTitle(title);
+        }
+
+        public List<PostDTO> FindPostsByContent(string content)
+        {
+            return postDAL.FindPostsByContent(content);
+        }
+
+        public List<PostDTO> FindPostsByDate(string date)
+        {
+            return postDAL.FindPostsByDate(date);
         }
 
         public PostDTO CreatePost(PostDTO post)
