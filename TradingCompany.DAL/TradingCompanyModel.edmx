@@ -17,7 +17,8 @@
           <Key>
             <PropertyRef Name="PostID" />
           </Key>
-          <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
           <Property Name="Title" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="Content" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="RowInsertTime" Type="datetime" Nullable="false" />
@@ -51,11 +52,23 @@
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="binary" MaxLength="64" Nullable="false" />
-          <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="binary" MaxLength="64" />
+          <Property Name="Salt" Type="uniqueidentifier" />
           <Property Name="RowInsertTime" Type="datetime" Nullable="false" />
           <Property Name="RowUpdateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Post_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PostProduct_Post">
           <End Role="Post" Type="Self.Post" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -104,6 +117,10 @@
           <EntitySet Name="PostProduct" EntityType="Self.PostProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Post_User" Association="Self.FK_Post_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
           <AssociationSet Name="FK_PostProduct_Post" Association="Self.FK_PostProduct_Post">
             <End Role="Post" EntitySet="Post" />
             <End Role="PostProduct" EntitySet="PostProduct" />
@@ -140,6 +157,8 @@
           <Property Name="RowInsertTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RowUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="PostProducts" Relationship="Self.FK_PostProduct_Post" FromRole="Post" ToRole="PostProduct" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TradingCompanyModel.FK_Post_User" FromRole="Post" ToRole="User" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -220,6 +239,10 @@
             <End Role="PostProduct" EntitySet="PostProducts" />
           </AssociationSet>
           <EntitySet Name="Users" EntityType="TradingCompanyModel.User" />
+          <AssociationSet Name="FK_Post_User" Association="TradingCompanyModel.FK_Post_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -228,11 +251,24 @@
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="Binary" Nullable="false" MaxLength="64" FixedLength="true" />
-          <Property Name="Salt" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="Binary" MaxLength="64" FixedLength="true" />
+          <Property Name="Salt" Type="Guid" />
           <Property Name="RowInsertTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RowUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Posts" Relationship="TradingCompanyModel.FK_Post_User" FromRole="User" ToRole="Post" />
         </EntityType>
+        <Association Name="FK_Post_User">
+          <End Type="TradingCompanyModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TradingCompanyModel.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -251,6 +287,7 @@
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="TradingCompanyModel.Post">
               <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="PostID" ColumnName="PostID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Content" ColumnName="Content" />

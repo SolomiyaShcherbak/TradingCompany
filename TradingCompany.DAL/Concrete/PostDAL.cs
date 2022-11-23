@@ -3,6 +3,7 @@ using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using TradingCompany.DTO;
 
 namespace DAL.Concrete
@@ -40,6 +41,15 @@ namespace DAL.Concrete
                 {
                     return null;
                 }
+            }
+        }
+
+        public List<PostDTO> FindPosts(string searchInfo)
+        {
+            using (var entities = new TradingCompanyEntities())
+            {
+                var posts = entities.Posts.Where(p => p.Title.Contains(searchInfo)).ToList();
+                return _mapper.Map<List<PostDTO>>(posts);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TradingCompany.DTO
 {
@@ -17,6 +18,8 @@ namespace TradingCompany.DTO
         public DateTime RowInsertTime { get; set; }
 
         public DateTime RowUpdateTime { get; set; }
+
+        public List<PostDTO> Posts { get; set; }
 
         public override string ToString()
         {

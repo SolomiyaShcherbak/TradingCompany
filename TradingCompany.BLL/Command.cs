@@ -80,7 +80,7 @@ namespace TradingCompany.BLL
 
         public CategoryDTO GetCategoryByID(int id)
         {
-            return categoryDAL.GetCategoryById(id);
+            return categoryDAL.GetCategoryByID(id);
         }
 
         public CategoryDTO AddCategory(CategoryDTO category)

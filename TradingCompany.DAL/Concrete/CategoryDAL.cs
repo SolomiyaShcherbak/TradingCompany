@@ -25,7 +25,7 @@ namespace DAL.Concrete
             }
         }
 
-        public CategoryDTO GetCategoryById(int id)
+        public CategoryDTO GetCategoryByID(int id)
         {
             using (var entities = new TradingCompanyEntities())
             {
