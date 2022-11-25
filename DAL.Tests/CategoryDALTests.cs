@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DAL.Concrete;
 using NUnit.Framework;
-using System;
 using TradingCompany.DTO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;

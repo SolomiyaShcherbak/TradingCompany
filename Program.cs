@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using DAL.Concrete;
-using System;
-
-namespace TradingCompany
+﻿namespace TradingCompany
 {
     internal class Program
     {

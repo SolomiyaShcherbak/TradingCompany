@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DAL.Concrete;
-using DAL.Interfaces;
 using System;
 using TradingCompany.BLL;
 using TradingCompany.DTO;

@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using TradingCompany.DTO;
-using System.Data.Entity.Infrastructure;
 
 namespace DAL.Tests
 {

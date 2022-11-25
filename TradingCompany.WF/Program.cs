@@ -2,10 +2,6 @@
 using DAL.Concrete;
 using DAL.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TradingCompany.BLL.Concrete;
 using TradingCompany.BLL.Interfaces;
